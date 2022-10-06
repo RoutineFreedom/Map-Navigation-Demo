@@ -7,4 +7,4 @@
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
 [node name="PlayerIcon" parent="Navigation2D" instance=ExtResource( 1 )]
-position = Vector2( 37, 29 )
+position = Vector2( 526, 380 )
