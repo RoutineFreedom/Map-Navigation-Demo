@@ -11,14 +11,14 @@ var _destination := Vector2.ZERO
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("LeftClick"):
 		_agent.set_target_location(get_global_mouse_position())
-		#print(_agent.get_nav_path())
+		_agent.get_next_location()
+		print(_agent.get_nav_path())
 		_destination = event.global_position
 		
 func _physics_process(delta: float) -> void:
 	if _destination == Vector2.ZERO:
 		return
-	
-	if _destination != Vector2.ZERO:
+	else:
 		var _direction := _destination.direction_to(_agent.get_next_location()) * -1
 		# Modify velocity for steering behaviour
 		var _desired_velocity := _direction * max_speed
