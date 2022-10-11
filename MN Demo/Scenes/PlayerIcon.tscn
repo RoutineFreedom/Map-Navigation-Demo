@@ -7,7 +7,6 @@
 extents = Vector2( 30, 30 )
 
 [node name="PlayerIcon" type="KinematicBody2D"]
-scale = Vector2( 0.25, 0.25 )
 script = ExtResource( 2 )
 steering_damp = 10.0
 
@@ -20,4 +19,6 @@ position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 100.0
+target_desired_distance = 10.0
+
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_NavigationAgent2D_target_reached"]

@@ -15,10 +15,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_destination = event.global_position
 		
 func _physics_process(delta: float) -> void:
-	if _agent.is_navigation_finished():
-		print("!!! FINISHED NAVIGATION !!!")
-		_destination = Vector2.ZERO
-		_velocity = Vector2.ZERO
+	if _destination == Vector2.ZERO:
 		return
 	
 	if _destination != Vector2.ZERO:
@@ -31,3 +28,6 @@ func _physics_process(delta: float) -> void:
 		
 		_velocity = move_and_slide(_velocity)
 
+func _on_NavigationAgent2D_target_reached() -> void:
+	_destination = Vector2.ZERO
+	_velocity = Vector2.ZERO
