@@ -7,7 +7,9 @@
 extents = Vector2( 30, 30 )
 
 [node name="PlayerIcon" type="KinematicBody2D"]
+scale = Vector2( 0.25, 0.25 )
 script = ExtResource( 2 )
+steering_damp = 10.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -18,4 +20,4 @@ position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 10.0
+target_desired_distance = 100.0
