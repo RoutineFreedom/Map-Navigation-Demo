@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/PlayerIcon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/World.gd" type="Script" id=2]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 1020, 9, 1032, 604, 0, 591, 2, 5 )
@@ -8,6 +9,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 2, 5, 0, 591, 1032, 604, 1020, 9 ) ]
 
 [node name="World" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
@@ -17,3 +19,7 @@ navpoly = SubResource( 1 )
 
 [node name="PlayerIcon" parent="Navigation2D" instance=ExtResource( 1 )]
 position = Vector2( 526, 380 )
+
+[node name="Line2D" type="Line2D" parent="."]
+
+[connection signal="path_updated" from="Navigation2D/PlayerIcon" to="." method="_on_PlayerIcon_path_updated"]
