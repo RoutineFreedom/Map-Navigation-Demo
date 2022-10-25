@@ -10,7 +10,6 @@ onready var _agent: NavigationAgent2D = $NavigationAgent2D
 
 var _velocity := Vector2.ZERO
 var _target_location := Vector2.ZERO
-var _confirm_location := Vector2.ZERO
 var _target_area: Rect2
 var _path: PoolVector2Array
 var _click_count := 0
@@ -22,22 +21,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("LeftClick"):
 		# Player has clicked once, set this location as target
 		if _click_count == 0:
-			_click_count += 1
-			_target_location = get_global_mouse_position()
-			_agent.set_target_location(_target_location)
-			_agent.get_next_location()
-			# Create rectangle with target location as the middle point
-			var _top_left = Vector2(_target_location.x - rect_size / 2, _target_location.y - rect_size / 2)
-			_target_area = Rect2(_top_left, Vector2(rect_size, rect_size))
+			set_target()
 		# Player has clicked twice, set this location as potential confirmation
 		else:
-			_confirm_location = get_global_mouse_position()
+			var _confirm_location = get_global_mouse_position()
 			 
 			# Only update to second click if it is withing target area
 			if _target_area.has_point(_confirm_location):
 				_click_count += 1
 			else:
 				_click_count = 0
+				set_target()
 		
 func _physics_process(delta: float) -> void:
 	if _agent.is_target_reached():
@@ -50,6 +44,15 @@ func _physics_process(delta: float) -> void:
 		_velocity += _steering
 		
 		_velocity = move_and_slide(_velocity)
+		
+func set_target():
+	_click_count += 1
+	_target_location = get_global_mouse_position()
+	_agent.set_target_location(_target_location)
+	_agent.get_next_location()
+	# Create rectangle with target location as the middle point
+	var _top_left = Vector2(_target_location.x - rect_size / 2, _target_location.y - rect_size / 2)
+	_target_area = Rect2(_top_left, Vector2(rect_size, rect_size))
 
 func _on_NavigationAgent2D_target_reached() -> void:
 	_velocity = Vector2.ZERO
