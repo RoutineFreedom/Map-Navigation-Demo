@@ -24,3 +24,4 @@ max_speed = 600.0
 [node name="Line2D" type="Line2D" parent="."]
 
 [connection signal="path_updated" from="Navigation2D/PlayerIcon" to="." method="_on_PlayerIcon_path_updated"]
+[connection signal="target_reached" from="Navigation2D/PlayerIcon" to="." method="_on_PlayerIcon_target_reached"]

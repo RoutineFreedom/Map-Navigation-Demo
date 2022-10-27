@@ -14,3 +14,6 @@ func _on_PlayerIcon_path_updated(path: PoolVector2Array) -> void:
 	# Make a line to the path
 	for point in path:
 		line_2d.add_point(point)
+
+func _on_PlayerIcon_target_reached() -> void:
+	line_2d.clear_points()

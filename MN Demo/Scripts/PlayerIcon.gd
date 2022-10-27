@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal path_updated
+signal target_reached
 
 export (float) var max_speed := 500.0
 export (float) var steering_damp := 6.0
@@ -57,6 +58,7 @@ func set_target():
 func _on_NavigationAgent2D_target_reached() -> void:
 	_velocity = Vector2.ZERO
 	_click_count = 0
+	emit_signal("target_reached")
 
 func _on_NavigationAgent2D_path_changed() -> void:
 	_path = _agent.get_nav_path()
