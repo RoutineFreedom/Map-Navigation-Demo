@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal path_updated
 signal target_reached
+signal clicked
 
 export (float) var max_speed := 500.0
 export (float) var steering_damp := 6.0
@@ -20,6 +21,7 @@ func _ready() -> void:
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("LeftClick"):
+		var _debug_text := "Path Chosen"
 		# Player has clicked once, set this location as target
 		if _click_count == 0:
 			set_target()
@@ -29,10 +31,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			 
 			# Only update to second click if it is withing target area
 			if _target_area.has_point(_confirm_location):
+				_debug_text = "Path Confirmed"
 				_click_count += 1
+			# Otherwise just change target
 			else:
+				_debug_text = "Path Re-Chosen"
 				_click_count = 0
 				set_target()
+				
+		emit_signal("clicked", _debug_text)
 		
 func _physics_process(delta: float) -> void:
 	if _agent.is_target_reached():
