@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal path_updated
 signal target_reached
+signal target_set
 signal clicked
 
 export (float) var max_speed := 500.0
@@ -53,7 +54,7 @@ func _physics_process(delta: float) -> void:
 		
 		_velocity = move_and_slide(_velocity)
 		
-func set_target():
+func set_target() -> void:
 	_click_count += 1
 	_target_location = get_global_mouse_position()
 	_agent.set_target_location(_target_location)
@@ -61,6 +62,7 @@ func set_target():
 	# Create rectangle with target location as the middle point
 	var _top_left = Vector2(_target_location.x - rect_size / 2, _target_location.y - rect_size / 2)
 	_target_area = Rect2(_top_left, Vector2(rect_size, rect_size))
+	emit_signal("target_set", _target_location, position.angle_to_point(get_global_mouse_position()))
 
 func _on_NavigationAgent2D_target_reached() -> void:
 	_velocity = Vector2.ZERO
