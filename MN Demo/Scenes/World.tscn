@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/PlayerIcon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=2]
 [ext_resource path="res://Assets/target.png" type="Texture" id=3]
-[ext_resource path="res://Assets/right.png" type="Texture" id=4]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 1022, 4, 1032, 604, -2, 603, 2, 5 )
@@ -35,11 +34,6 @@ margin_top = 11.0
 margin_right = 107.0
 margin_bottom = 38.0
 text = "Debug"
-
-[node name="Right" type="Sprite" parent="."]
-position = Vector2( 114, 454 )
-rotation = 1.5708
-texture = ExtResource( 4 )
 
 [connection signal="clicked" from="Navigation2D/PlayerIcon" to="." method="_on_PlayerIcon_clicked"]
 [connection signal="path_updated" from="Navigation2D/PlayerIcon" to="." method="_on_PlayerIcon_path_updated"]

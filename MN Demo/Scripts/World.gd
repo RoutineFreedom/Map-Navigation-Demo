@@ -31,13 +31,14 @@ func _on_PlayerIcon_clicked(debug_text: String) -> void:
 	debug_label.text = debug_text
 
 func _on_PlayerIcon_target_set(location: Vector2, mouse_angle: float) -> void:
-	print(rad2deg(mouse_angle))
 	set_target_sprite(location, mouse_angle)
 	
 func set_target_sprite(location: Vector2, mouse_angle: float) -> void:
 	_target_sprite.visible = true
 	_target_sprite.global_position = location
-	_target_sprite.rotation = mouse_angle + PI
+	# Add PI to reverse mirror the rotation
+	# This is necessary because by default the arrow is rotated 180 degrees
+	_target_sprite.rotation = mouse_angle
 
 
 
