@@ -18,6 +18,7 @@ var _path: PoolVector2Array
 var _click_count := 0
 
 func _ready() -> void:
+	_agent.connect("velocity_computed", self, "move")
 	_agent.set_target_location(global_position)
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -52,7 +53,10 @@ func _physics_process(delta: float) -> void:
 		var _steering := (_desired_velocity - _velocity) * delta * steering_damp
 		_velocity += _steering
 		
-		_velocity = move_and_slide(_velocity)
+		_agent.set_velocity(_velocity)
+		
+func move(velocity: Vector2) -> void:
+	_velocity = move_and_slide(velocity)
 		
 func set_target() -> void:
 	_click_count += 1

@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/PlayerIcon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=2]
 [ext_resource path="res://Assets/target.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Obstacle.tscn" type="PackedScene" id=4]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 1022, 4, 1032, 604, -2, 603, 2, 5 )
+vertices = PoolVector2Array( 1379, -275, 1366, 878, -344, 865, -346, -271 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 2, 5, -2, 603, 1032, 604, 1022, 4 ) ]
+outlines = [ PoolVector2Array( -346, -271, -344, 865, 1366, 878, 1379, -275 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
@@ -21,6 +22,16 @@ navpoly = SubResource( 1 )
 [node name="PlayerIcon" parent="Navigation2D" instance=ExtResource( 1 )]
 position = Vector2( 487, 307 )
 max_speed = 600.0
+
+[node name="Obstacle" parent="Navigation2D" instance=ExtResource( 4 )]
+position = Vector2( 289, 472 )
+
+[node name="Obstacle2" parent="Navigation2D" instance=ExtResource( 4 )]
+position = Vector2( 181, 154 )
+
+[node name="Obstacle3" parent="Navigation2D" instance=ExtResource( 4 )]
+position = Vector2( 733, 193 )
+scale = Vector2( 0.5, 1 )
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 50.0
