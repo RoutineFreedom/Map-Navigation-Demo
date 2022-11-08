@@ -22,6 +22,7 @@ shape = SubResource( 1 )
 target_desired_distance = 10.0
 avoidance_enabled = true
 radius = 45.0
+neighbor_dist = 200.0
 max_speed = 500.0
 
 [connection signal="path_changed" from="NavigationAgent2D" to="." method="_on_NavigationAgent2D_path_changed"]
